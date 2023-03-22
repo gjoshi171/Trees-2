@@ -1,0 +1,31 @@
+//iterative
+ //Time complexity: O(n)
+ //space complexity: O(h) //h: height of tree
+class SumRootToLeafNumbersIterative {
+     int result=0;
+    int currSum=0; 
+    public int sumNumbers(TreeNode root) {
+        
+       Stack<TreeNode> stack = new Stack<>();
+        Stack<Integer> currSumStack = new Stack<>();
+         
+        while(root!=null || !stack.isEmpty()){
+            while(root!=null){
+                currSum= currSum*10+root.val;
+                stack.push(root);
+                currSumStack.push(currSum);
+                root=root.left;
+            }
+            root= stack.pop();
+            currSum= currSumStack.pop();
+
+            if(root.left==null && root.right==null){
+                result +=currSum;
+            }
+
+            root=root.right;
+
+        }
+        return result;
+    }
+}
