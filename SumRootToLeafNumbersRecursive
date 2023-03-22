@@ -1,0 +1,25 @@
+//Time complexity: O(n)
+ //space complexity: O(h) //h: height of tree
+class SumRootToLeafNumbersRecursive {
+    int result;
+    public int sumNumbers(TreeNode root) {
+        helper(root, 0 );
+        return result;
+    }
+    private void helper(TreeNode root, int currNum){
+        if(root== null){return;}  
+        
+         currNum=currNum*10+root.val;
+
+        //checking if we reach to the leaf node
+        if(root.left==null && root.right==null){
+            result += currNum;
+        }
+       
+        //we are taking local variable in order to keep track of state
+        //There will be two values in the stack i.e root and currNum 
+        helper(root.left, currNum);
+        helper(root.right, currNum);
+
+    }
+}
